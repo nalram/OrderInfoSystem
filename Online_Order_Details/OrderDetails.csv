@@ -1,0 +1,9 @@
+Order_ID,Customer_Name,Item_Purchased,Quantity,Order_Date,Total_Price ($),Order_Status
+1001,Alice Johnson,Bluetooth Headset,2,10/04/2025,49.98,Shipped
+1002,Ravi Kumar,USB-C Cable,1,11/04/2025,9.99,Delivered
+1003,Emma Wong,Wireless Mouse,1,12/04/2025,24.99,Cancelled
+1004,James Lee,Laptop Stand,1,13/04/2025,34.95,Delivered
+1005,Nina Patel,Portable Charger,3,14/04/2025,59.85,Shipped
+1006,Samir Gupta,Keyboard,1,15/04/2025,29.99,Delivered
+1007,Linda Park,Monitor,2,15/04/2025,299.98,Cancelled
+1008,Isabella Turner,Smart Watch,1,18/04/2025,149.00,Delivered
