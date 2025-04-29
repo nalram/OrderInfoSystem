@@ -104,6 +104,50 @@ def display_records():
               f"{total_price[i]:>10.2f}  "
               f"{order_status[i][:14]:<15}")
 
+# Function to add record
+# Allows the user to input a new order and appends it to the parallel arrays.
+def add_record():
+
+    print("\nAdd New Order")
+    print("-" * 30)
+
+    # Auto-generate a new Order ID
+    new_id = order_id[-1] + 1 if order_id else 1001  # start from 1001 if empty
+
+    # Get user input for each field
+    name = input("Enter customer name: ")
+    item = input("Enter item purchased: ")
+
+    while True:
+        try:
+            qty = int(input("Enter quantity: "))
+            break
+        except ValueError:
+            print("Invalid input. Please enter a valid integer for quantity.")
+
+    date = input("Enter order date (DD-MM-YYYY): ")
+
+    while True:
+        try:
+            price = float(input("Enter total price: "))
+            break
+        except ValueError:
+            print("Invalid input. Please enter a valid number for price.")
+
+    status = input("Enter order status (Shipped/Delivered/Cancelled): ")
+
+    # Append to the parallel array
+    order_id.append(new_id)
+    customer_name.append(name)
+    item_purchased.append(item)
+    quantity.append(qty)
+    order_date.append(date)
+    total_price.append(price)
+    order_status.append(status)
+
+    print("\nRecord added successfully!")
+
+
 # Function to display main menu
 def display_menu():
 
@@ -126,7 +170,7 @@ def display_menu():
             if not check_empty():
                 display_records()
         elif choice == "3":
-            print("3")
+            add_record()
         elif choice == "4":
             print("4")
         elif choice == "5":
