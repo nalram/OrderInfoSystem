@@ -22,6 +22,15 @@ total_price = []        # float: Total cost of the order
 order_status = []       # str: Status like 'Shipped', 'Delivered', 'Cancelled'
 records_loaded = False  # Track if CSV was loaded
 
+# Function to check for empty array before performing display / delete / save operations
+def check_empty():
+
+    # Check for empty array
+    if not order_id:
+        print("No records found. Please add or load records first.")
+        return True  # It is empty
+    return False     # It is not empty
+
 # Function to clear old data if already loaded in the parallel array
 def clear_array():
     global records_loaded
@@ -71,6 +80,30 @@ def load_records():
         # Clear old data if already loaded
         clear_array()
 
+# Function to display records
+# Displays all order records from the parallel array on to the screen in a formatted table.
+def display_records():
+
+    # Print  Application Title
+    print(f"\n{'Online Order Details':^100}")
+    print("=" * 110)
+
+    # Print column headers
+    print(f"{column_header[0]:>8}  {column_header[1]:<25} {column_header[2]:<25} "
+          f"{column_header[3]:>5}  {column_header[4]:<12} {column_header[5]:>10}  {column_header[6]:<12}")
+    print("-" * 110)
+
+    # Print each row
+    for i in range(len(order_id)):
+        # Format:
+        print(f"{order_id[i]:>8d}  "
+              f"{customer_name[i][:24]:<25} "
+              f"{item_purchased[i][:24]:<25} "
+              f"{quantity[i]:>5d}  "
+              f"{order_date[i]:<12} "
+              f"{total_price[i]:>10.2f}  "
+              f"{order_status[i][:14]:<15}")
+
 # Function to display main menu
 def display_menu():
 
@@ -90,7 +123,8 @@ def display_menu():
         if choice == "1":
             load_records()
         elif choice == "2":
-            print("2")
+            if not check_empty():
+                display_records()
         elif choice == "3":
             print("3")
         elif choice == "4":
