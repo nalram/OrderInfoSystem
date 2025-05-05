@@ -148,6 +148,53 @@ def add_record():
     print("\nRecord added successfully!")
 
 
+# Function to delete record
+# Deletes a specific order from the arrays based on the entered Order ID.
+def delete_record():
+
+    print("\nDelete Record")
+    print("-" * 20)
+
+    while True:
+        try:
+            del_order_id = int(input("Enter the Order ID to delete: "))
+            break
+        except ValueError:
+            print("Invalid input. Please enter a valid integer for Order ID.")
+
+    if del_order_id in order_id:
+        index = order_id.index(del_order_id)
+
+        # Show the record details before confirming deletion
+        print("\nRecord to be deleted:")
+        print("-" * 80)
+        print(f"Order ID   : {order_id[index]}")
+        print(f"Customer   : {customer_name[index]}")
+        print(f"Item       : {item_purchased[index]}")
+        print(f"Quantity   : {quantity[index]}")
+        print(f"Date       : {order_date[index]}")
+        print(f"Total Price: {total_price[index]:.2f}")
+        print(f"Status     : {order_status[index]}")
+        print("-" * 50)
+
+        confirm = input("Are you sure you want to delete this record? (Y/N): ").strip().lower()
+        if confirm == 'y':
+            # Remove the item at the same index from all parallel arrays
+            order_id.pop(index)
+            customer_name.pop(index)
+            item_purchased.pop(index)
+            quantity.pop(index)
+            order_date.pop(index)
+            total_price.pop(index)
+            order_status.pop(index)
+
+            print(f"\nOrder ID: {del_order_id} deleted successfully!")
+        else:
+            print("\nDeletion cancelled.")
+    else:
+        print(f"\nOrder ID: {del_order_id} not found.")
+
+
 # Function to display main menu
 def display_menu():
 
@@ -172,7 +219,8 @@ def display_menu():
         elif choice == "3":
             add_record()
         elif choice == "4":
-            print("4")
+            if not check_empty():
+                delete_record()
         elif choice == "5":
             print("5")
         elif choice == "6":
