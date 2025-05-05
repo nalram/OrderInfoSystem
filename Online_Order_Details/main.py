@@ -194,6 +194,41 @@ def delete_record():
     else:
         print(f"\nOrder ID: {del_order_id} not found.")
 
+# Function to save records
+# Saves all current records from the parallel arrays to OrderDetails.csv.
+def save_records():
+
+    if not records_loaded:
+        print("You haven't loaded the existing records.")
+        confirm = input("Saving now will overwrite the file and keep only current records. Continue? (Y/N): ").strip().lower()
+        if confirm != 'y':
+            print("Save cancelled.")
+            return
+
+    try:
+        with open('OrderDetails.csv', mode='w', newline='') as csv_file_obj:
+            csv_writer = csv.writer(csv_file_obj)
+
+            # Write the header row
+            csv_writer.writerow(column_header)
+
+            # Write each row from parallel arrays
+            for i in range(len(order_id)):
+                csv_writer.writerow([
+                    order_id[i],
+                    customer_name[i],
+                    item_purchased[i],
+                    quantity[i],
+                    order_date[i],
+                    total_price[i],
+                    order_status[i]
+                ])
+
+        print("\nRecords successfully saved to 'OrderDetails.csv'.")
+
+    except Exception as e:
+        print(f"\nError saving records: {e}")
+
 
 # Function to display main menu
 def display_menu():
@@ -222,7 +257,8 @@ def display_menu():
             if not check_empty():
                 delete_record()
         elif choice == "5":
-            print("5")
+            if not check_empty():
+                save_records()
         elif choice == "6":
             break
         else:
