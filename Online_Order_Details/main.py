@@ -313,21 +313,25 @@ def delete_record():
         print(f"Status     : {order_status[index]}")
         print("-" * 50)
 
-        confirm = input("Are you sure you want to delete this record? (Y/N): ").strip().lower()
-        if confirm == 'y':
-            # Remove the item at the same index from all parallel arrays
-            order_id.pop(index)
-            customer_name.pop(index)
-            item_purchased.pop(index)
-            quantity.pop(index)
-            order_date.pop(index)
-            total_price.pop(index)
-            order_status.pop(index)
+        while True:
+            confirm = input("Are you sure you want to delete this record? (Y/N): ").strip().lower()
+            if confirm == 'y':
+                # Remove the item at the same index from all parallel arrays
+                order_id.pop(index)
+                customer_name.pop(index)
+                item_purchased.pop(index)
+                quantity.pop(index)
+                order_date.pop(index)
+                total_price.pop(index)
+                order_status.pop(index)
 
-            print(f"\nOrder ID: {del_order_id} deleted successfully!")
-            records_not_saved = True
-        else:
-            print("\nDeletion cancelled.")
+                print(f"\nOrder ID: {del_order_id} deleted successfully!")
+                records_not_saved = True
+                break
+            elif confirm == 'n':
+                print("Deletion cancelled.")
+                break
+            print("Invalid input. Please enter 'Y' for yes or 'N' for no.")
     else:
         print(f"\nOrder ID: {del_order_id} not found.")
 
@@ -341,7 +345,7 @@ def save_records():
     try:
 
         # Check opening file in write or append mode
-        if not records_loaded and data_found:
+        if not records_loaded:
             print("Note: Your new entries will be added to the existing records in the file.")
             set_file_mode = 'a' # Append mode if records were not loaded
         else:
